@@ -31,4 +31,10 @@ export class ArticleComponentComponent {
   togglePublication(): void {
     this.article.isPublished = !this.article.isPublished;
   }
+
+  isAdmin: boolean = true;
+
+  toggleIsAdmin(): void {
+    this.isAdmin = !this.isAdmin;
+  }
 }
