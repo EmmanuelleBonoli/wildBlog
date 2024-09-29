@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -9,6 +9,7 @@ export interface Article {
   image: string;
   isPublished: boolean;
   comment: string;
+  likes: number;
 }
 
 @Component({
@@ -19,14 +20,7 @@ export interface Article {
   styleUrl: './article-component.component.scss',
 })
 export class ArticleComponentComponent {
-  article: Article = {
-    title: 'My wonderful Article !',
-    author: 'Manu B.',
-    content: "This is the best article, you've never seen before !",
-    image: 'https://via.placeholder.com/350x150',
-    isPublished: true,
-    comment: '',
-  };
+  @Input() article!: Article;
 
   togglePublication(): void {
     this.article.isPublished = !this.article.isPublished;
