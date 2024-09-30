@@ -7,6 +7,7 @@ import {
   ArticleService,
   Article,
 } from '../service/article-service/article-service.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article-component',
@@ -17,6 +18,7 @@ import {
 })
 export class ArticleComponentComponent {
   article!: Article;
+  router: Router = inject(Router);
   route: ActivatedRoute = inject(ActivatedRoute);
   articleId!: number;
   articleService: ArticleService = inject(ArticleService);
@@ -24,7 +26,14 @@ export class ArticleComponentComponent {
   ngOnInit() {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.articleId = Number(params.get('id'));
-      this.article = this.articleService.getArticleById(this.articleId);
+
+      const articleLength: number = this.articleService.getArticles().length;
+
+      if (articleLength >= this.articleId) {
+        this.article = this.articleService.getArticleById(this.articleId);
+      } else {
+        this.router.navigate(['**']);
+      }
     });
   }
 
