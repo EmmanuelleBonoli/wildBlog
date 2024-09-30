@@ -1,0 +1,7 @@
+<h1>Accueil</h1>
+<h2>Liste des acticles :</h2>
+<div class="listOfArticles">
+  @for(article of articles; track $index){
+  <a [routerLink]="['/article', article.id]">{{ article.title }}</a>
+  }
+</div>

@@ -1,16 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
-export interface Article {
-  title: string;
-  author: string;
-  content: string;
-  image: string;
-  isPublished: boolean;
-  comment: string;
-  likes: number;
-}
+import { ActivatedRoute } from '@angular/router';
+import { ParamMap } from '@angular/router';
+import {
+  ArticleService,
+  Article,
+} from '../service/article-service/article-service.component';
 
 @Component({
   selector: 'app-article-component',
@@ -20,7 +16,17 @@ export interface Article {
   styleUrl: './article-component.component.scss',
 })
 export class ArticleComponentComponent {
-  @Input() article!: Article;
+  article!: Article;
+  route: ActivatedRoute = inject(ActivatedRoute);
+  articleId!: number;
+  articleService: ArticleService = inject(ArticleService);
+
+  ngOnInit() {
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.articleId = Number(params.get('id'));
+      this.article = this.articleService.getArticleById(this.articleId);
+    });
+  }
 
   togglePublication(): void {
     this.article.isPublished = !this.article.isPublished;
