@@ -1,13 +1,11 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-// import { ActivatedRoute } from '@angular/router';
-// import { ParamMap } from '@angular/router';
+// import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import {
   ArticleService,
   Article,
 } from '../service/article-service/article-service.component';
-// import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article-component',
@@ -18,6 +16,7 @@ import {
 })
 export class ArticleComponentComponent {
   @Input() article!: Article;
+  @Output() notifyLike: EventEmitter<string> = new EventEmitter<string>();
   // router: Router = inject(Router);
   // route: ActivatedRoute = inject(ActivatedRoute);
   // articleId!: number;
@@ -45,5 +44,9 @@ export class ArticleComponentComponent {
 
   toggleIsAdmin(): void {
     this.isAdmin = !this.isAdmin;
+  }
+
+  addFavorite(title: string): void {
+    this.notifyLike.emit(`L'article ${title} vient d'être liké`);
   }
 }

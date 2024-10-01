@@ -4,6 +4,9 @@
     [ngStyle]="{ color: article.likes > 150 ? 'green' : 'black' }"
     [ngClass]="{ 'popular-article': article.likes > 100 }"
   >
+    <button class="btn btn-primary" (click)="addFavorite(article.title)">
+      Like
+    </button>
     <h1>
       {{ article.title }}
     </h1>

@@ -19,8 +19,13 @@ export class HomePageComponent {
   articleService: ArticleService = inject(ArticleService);
 
   statusUser: boolean = true;
+  lastArticleLiked: string = '';
 
   ngOnInit() {
     this.articles = this.articleService.getArticles();
+  }
+
+  handleNotificationLike(message: string): void {
+    this.lastArticleLiked = message;
   }
 }
