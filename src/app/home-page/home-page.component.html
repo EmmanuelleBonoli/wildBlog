@@ -3,7 +3,8 @@
 <h2>Liste des acticles :</h2>
 <div class="listOfArticles">
   @for(article of articles; track $index){
-  <a [routerLink]="['/article', article.id]">{{ article.title }}</a>
+  <app-article-component [article]="article"></app-article-component>
+  <!-- <a [routerLink]="['/article', article.id]">{{ article.title }}</a> -->
   }
 </div>
 
